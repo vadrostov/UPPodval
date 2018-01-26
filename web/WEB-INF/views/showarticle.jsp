@@ -107,6 +107,22 @@
             <div class="col-md-4 col-lg-4">Автор: ${article.author}</div>
             <div class="col-md-1 col-lg-offset-2"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> </div>
         </div>
+        <div class="row" style="background-color: lavender">
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div  class="col-lg-4"></div>
+                    <div class="col-lg-4"></div>
+
+                </div>
+
+            </div>
+            <div class="col-md-8 col-lg-10">
+                <c:forEach items="${article.tags}" var="tag">
+                    <a href="/feed/tag?tagname=${tag.name}"><c:out value="${tag.name}"/></a>
+                </c:forEach>
+            </div>
+        </div>
         <div class="row">
 
             <div class="col-md-10 col-lg-12"><c:out escapeXml="false" value="${article.content}"/>

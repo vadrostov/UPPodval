@@ -42,16 +42,25 @@
 
 <sf:form method="post" modelAttribute="createdArticle" onsubmit="confirmForChanges()">
 name<sf:input path="name"/><br/>
+    <sf:input path="tags"/><br/>
     <sf:textarea path="content" id="text" />
-    <input type="submit"/>
+    <input type="submit"/> <br/>
+    <input type="button" value="Предпросмотр" onclick="doPreview(text.value)">
 
 </sf:form>
 <br/>
 
-${requestScope['javax.servlet.forward.request_uri']}
+<div id="preview"></div>
+
 <br/>
 
+<script type="text/javascript">
+    function doPreview(text) {
 
+        var result = text;
+        $("#preview").html(result);
+    }
+</script>
 
 </body>
 </html>

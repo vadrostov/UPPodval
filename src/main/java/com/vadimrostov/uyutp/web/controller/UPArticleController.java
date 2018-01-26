@@ -6,22 +6,34 @@ import com.vadimrostov.uyutp.data.domain.Comment;
 import com.vadimrostov.uyutp.data.domain.Like;
 import com.vadimrostov.uyutp.data.domain.UPArticlePost;
 import com.vadimrostov.uyutp.service.UPCommentService;
+import com.vadimrostov.uyutp.service.UPImageService;
 import com.vadimrostov.uyutp.service.UPLikeService;
 import com.vadimrostov.uyutp.service.UPPostService;
 import com.vadimrostov.uyutp.web.controller.web.jsonbeans.Response;
+import com.vadimrostov.uyutp.web.dto.ArticleDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.HashSet;
 
 @Controller
 @RequestMapping("/article")
 public class UPArticleController {
 
+    private final static String ROLE_USER="ROLE_USER";
+    private final static String ROLE_ADMIN="ROLE_ADMIN";
+
     ModelAndView modelAndView= new ModelAndView();
+
+    @Autowired
+    UPImageService upImageService;
 
     @Autowired
     UPLikeService upLikeService;
@@ -33,19 +45,28 @@ public class UPArticleController {
     UPCommentService upCommentService;
 
 
+
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addArticle(){
-        modelAndView.addObject("createdArticle", new UPArticlePost());
+        modelAndView.addObject("createdArticle", new ArticleDto());
         modelAndView.setViewName("articleadmin");
         return modelAndView;
     }
-
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView saveArticle(UPArticlePost upArticlePost){
+    public ModelAndView saveArticle(ArticleDto articleDto){
+        try{
+            String formatedContent=upImageService.convertContent(articleDto.getContent());
+            articleDto.setContent(formatedContent);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
 
-        upArticlePost.setAuthor(SecurityContextHolder.getContext().getAuthentication().getName());
-        upArticlePost.setDate(new Date());
-        upPostService.saveArticlePost(upArticlePost);
+        articleDto.setAuthor(SecurityContextHolder.getContext().getAuthentication().getName());
+        articleDto.setDate(new Date());
+
+        UPArticlePost upArticlePost=upPostService.saveNewPost(articleDto);
         modelAndView.setViewName("redirect:/article/"+upArticlePost.getId());
         return modelAndView;
     }
@@ -75,6 +96,7 @@ public class UPArticleController {
     }
 
 
+    @Secured(ROLE_USER)
     @RequestMapping(value = "/comment", method = RequestMethod.GET)
     public @ResponseBody
     Response getAjax(@RequestParam String text, @RequestParam String val, @RequestParam String username){

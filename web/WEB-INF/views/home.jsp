@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: VRostov
@@ -11,8 +12,11 @@
     <title>Title</title>
 </head>
 <body>
-Ghbdtn
 
+<c:forEach items="${list}" var="auth">
+    <c:out value="${auth.authority}"/>
+
+</c:forEach>
 
 <br/>
 

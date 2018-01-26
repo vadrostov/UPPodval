@@ -34,6 +34,10 @@ public class UPUserDaoImpl implements UPUserDao {
         sessionFactory.getCurrentSession().save(user);
     }
 
+    public void updateUser(User user) {
+        sessionFactory.getCurrentSession().update(user);
+    }
+
     public User findByLogin(String login) {
         Query query=sessionFactory.getCurrentSession().createQuery("from User where login=:login");
         query.setParameter("login", login);

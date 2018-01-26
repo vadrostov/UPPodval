@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: VRostov
@@ -108,6 +109,22 @@
             <div class="col-md-4 col-lg-4">Автор: ${post.author}</div>
             <div class="col-md-1 col-lg-offset-2"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> </div>
         </div>
+            <div class="row" style="background-color: lavender">
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="col-lg-4"></div>
+                        <div  class="col-lg-4"></div>
+                        <div class="col-lg-4"></div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-8 col-lg-10">
+                    <c:forEach items="${post.tags}" var="tag">
+                        <c:out value="${tag.name}"/>
+                    </c:forEach>
+                </div>
+            </div>
         <div class="row" style="background-color: lavender">
 
             <div class="col-md-10 col-lg-12 success" style="background-color: lavender"><c:out escapeXml="false" value="${post.content}"/>
@@ -135,6 +152,21 @@
         <a href="#">Мои комментарии</a><br>
         <a href="#">Сохраненное</a><br>
 
+
+        <sec:authorize access="hasRole('ROLE_ANONYMOUS')">
+        <form name='f' method='POST'
+              action='/j_spring_security_check'>
+            <label for="j_username">Username: </label>
+            <input id="j_username" name="j_username" size="20" maxlength="50" type="text" /><br/>
+
+            <label for="j_password">Password: </label>
+            <input id="j_password" name="j_password" size="20" maxlength="50" type="password" /><br/>
+            <input type="submit" class="button button1" value="Login" />
+        </form>
+        </sec:authorize>
+        <sec:authorize access="hasRole('ROLE_USER')">
+            <a href="/user/${username}"><c:out value="${username}"/> </a>
+        </sec:authorize>
 
     </div>
 

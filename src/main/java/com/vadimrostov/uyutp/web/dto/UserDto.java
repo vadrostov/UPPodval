@@ -1,4 +1,4 @@
-package com.vadimrostov.uyutp.web.controller.dto;
+package com.vadimrostov.uyutp.web.dto;
 
 import com.vadimrostov.uyutp.security.validation.ValidEmail;
 import com.vadimrostov.uyutp.security.validation.ValidPassword;
@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 public class UserDto {
 
     @NotNull
-    @Size(min = 2, message = "{Size.userDto.login}")
+   // @Size(min = 2, message = "{Size.userDto.login}")
     private String login;
 
     @ValidPassword
@@ -23,6 +23,8 @@ public class UserDto {
     @NotNull
     @Size(min = 1, message = "{Size.userDto.email}")
     private String email;
+
+    private boolean makeadmin;
 
     public String getLogin() {
         return login;
@@ -56,5 +58,13 @@ public class UserDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isMakeadmin() {
+        return makeadmin;
+    }
+
+    public void setMakeadmin(boolean makeadmin) {
+        this.makeadmin = makeadmin;
     }
 }

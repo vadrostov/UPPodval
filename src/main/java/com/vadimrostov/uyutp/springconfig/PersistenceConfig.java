@@ -17,6 +17,9 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class PersistenceConfig {
 
+    private final static String HIBERNATE_HB2DLL_CREATE="create";
+    private final static String HIBERNATE_HB2DLL_UPDATE="update";
+
 
     @Bean
     public DataSource getDataSource(){
@@ -44,7 +47,7 @@ public class PersistenceConfig {
     {
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", true);
-        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.hbm2ddl.auto", HIBERNATE_HB2DLL_UPDATE);
 
         return properties;
     }

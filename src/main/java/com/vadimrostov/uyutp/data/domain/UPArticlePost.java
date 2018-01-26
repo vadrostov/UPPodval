@@ -27,6 +27,8 @@ public class UPArticlePost {
 
     private Set<Comment> comments;
 
+    private Set<UPTag> tags;
+
     @Id
     @Column(name = "ARTICLE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -92,6 +94,16 @@ public class UPArticlePost {
         this.like = like;
     }
 
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "UP_ARTICLE_TAG", joinColumns = {@JoinColumn(name = "ARTICLE_ID", nullable = false, updatable = false)}, inverseJoinColumns = {@JoinColumn(name = "TAG_ID", nullable = false, updatable = false, referencedColumnName = "TAG_ID")})
+    public Set<UPTag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<UPTag> tags) {
+        this.tags = tags;
+    }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "upArticlePost", cascade = CascadeType.ALL)
     public Set<Comment> getComments() {

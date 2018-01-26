@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: VRostov
@@ -14,7 +15,14 @@
 <body>
 
 login: <c:out value="${user.login}"/><br/>
-email: <c:out value="${user.email}"/>
+email: <c:out value="${user.email}"/><br/>
+
+<sf:form action="/user/submit" method="post" modelAttribute="user">
+    <sf:hidden path="login" />
+    Заадминить: <sf:checkbox path="makeadmin"/><br/>
+    <input type="submit">
+
+</sf:form>
 
 </body>
 </html>

@@ -11,6 +11,11 @@
     <title>$Title$</title>
   </head>
   <body>
+
+  <input id="uin" >
+  <<input type="submit" onclick="${uin.text}">
+
+
   <a href="${pageContext.request.contextPath}/menu/burger">Menu</a>
   <a href="/login">login</a><br/>
   <a href="${pageContext.request.contextPath}/admin">Admin</a>

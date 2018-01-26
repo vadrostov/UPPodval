@@ -5,4 +5,6 @@
 
     <mvc:annotation-driven/>
     <bean class="com.vadimrostov.uyutp.springconfig.MvcConfig"/>
+
+
 </beans>

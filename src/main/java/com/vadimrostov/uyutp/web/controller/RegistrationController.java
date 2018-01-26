@@ -4,7 +4,7 @@ import com.vadimrostov.uyutp.data.domain.user.User;
 import com.vadimrostov.uyutp.security.validation.EmailExistsException;
 import com.vadimrostov.uyutp.security.validation.LoginExistException;
 import com.vadimrostov.uyutp.service.UserService;
-import com.vadimrostov.uyutp.web.controller.dto.UserDto;
+import com.vadimrostov.uyutp.web.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,6 +25,8 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
+
+
     @RequestMapping(value = "/user/registration", method = RequestMethod.GET)
     public ModelAndView showRegForm(){
         UserDto userDto=new UserDto();
@@ -34,14 +36,14 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
-    public ModelAndView registerUser(@Valid UserDto accDto, Errors errors){
+    public ModelAndView registerUser(@Valid UserDto userDto, BindingResult bindingResult, Errors errors){
         User user=null;
         if (errors.hasErrors()){
             modelAndView.setViewName("userRegistration");
             return modelAndView;
         }
 
-        user=createUserAccount(accDto);
+        user=createUserAccount(userDto);
         if (user==null){
             modelAndView.setViewName("userRegistration");
             return modelAndView;

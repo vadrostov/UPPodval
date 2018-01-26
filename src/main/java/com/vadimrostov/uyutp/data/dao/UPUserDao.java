@@ -10,4 +10,6 @@ public interface UPUserDao {
     public User findByLogin(String login);
 
     public void saveUser(User user);
+
+    public void updateUser(User user);
 }
