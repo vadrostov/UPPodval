@@ -90,7 +90,7 @@
     function doDecAjax(id, val, user) {
 
         $.ajax({
-                url: '${pageContext.request.contextPath}/article/comment',
+                url: '${pageContext.request.contextPath}/article/UPComment',
                 type: 'get',
                 dataType: 'json',
                 contentType: 'application/json',

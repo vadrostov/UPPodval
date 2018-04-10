@@ -8,7 +8,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "UP_ARTICLE_LIKE")
-public class Like {
+public class UPPostLike {
 
 
     private Long id;

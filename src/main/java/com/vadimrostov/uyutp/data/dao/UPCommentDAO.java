@@ -1,15 +1,17 @@
 package com.vadimrostov.uyutp.data.dao;
 
-import com.vadimrostov.uyutp.data.domain.Comment;
+import com.vadimrostov.uyutp.data.domain.UPComment;
 
 import java.util.List;
 
 public interface UPCommentDAO {
 
 
-    public void save(Comment comment);
+    public void save(UPComment UPComment);
 
-    public List<Comment> getComments();
+    public List<UPComment> getComments();
 
-    public List<Comment> getCommentsForPost(Long id);
+    public List<UPComment> getCommentsForPost(Long id);
+
+    public UPComment getCommentById(Long id);
 }

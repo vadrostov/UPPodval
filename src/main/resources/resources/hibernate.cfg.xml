@@ -6,8 +6,8 @@
   <session-factory>
 
     <mapping class="com.vadimrostov.uyutp.data.domain.UPArticlePost"/>
-      <mapping class="com.vadimrostov.uyutp.data.domain.Like"/>
-      <mapping class="com.vadimrostov.uyutp.data.domain.Comment"/>
+      <mapping class="com.vadimrostov.uyutp.data.domain.UPPostLike"/>
+      <mapping class="com.vadimrostov.uyutp.data.domain.UPComment"/>
   </session-factory>
 
     

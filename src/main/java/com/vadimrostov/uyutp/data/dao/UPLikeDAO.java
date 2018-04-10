@@ -1,13 +1,13 @@
 package com.vadimrostov.uyutp.data.dao;
 
 
-import com.vadimrostov.uyutp.data.domain.Like;
+import com.vadimrostov.uyutp.data.domain.UPPostLike;
 
 public interface UPLikeDAO {
 
-    public void save(Like like);
+    public void save(UPPostLike UPPostLike);
 
-    public void update(Like like);
+    public void update(UPPostLike UPPostLike);
 
-    public void delete(Like like);
+    public void delete(UPPostLike UPPostLike);
 }

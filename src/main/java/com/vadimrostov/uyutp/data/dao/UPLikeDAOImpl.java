@@ -1,6 +1,6 @@
 package com.vadimrostov.uyutp.data.dao;
 
-import com.vadimrostov.uyutp.data.domain.Like;
+import com.vadimrostov.uyutp.data.domain.UPPostLike;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,16 +12,16 @@ public class UPLikeDAOImpl implements UPLikeDAO {
     SessionFactory sessionFactory;
 
 
-    public void save(Like like) {
-        sessionFactory.getCurrentSession().save(like);
+    public void save(UPPostLike UPPostLike) {
+        sessionFactory.getCurrentSession().save(UPPostLike);
 
     }
 
-    public void delete(Like like) {
-        sessionFactory.getCurrentSession().delete(like);
+    public void delete(UPPostLike UPPostLike) {
+        sessionFactory.getCurrentSession().delete(UPPostLike);
     }
 
-    public void update(Like like) {
-        sessionFactory.getCurrentSession().update(like);
+    public void update(UPPostLike UPPostLike) {
+        sessionFactory.getCurrentSession().update(UPPostLike);
     }
 }

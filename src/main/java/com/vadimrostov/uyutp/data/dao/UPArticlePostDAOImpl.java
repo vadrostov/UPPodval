@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 
@@ -16,6 +17,20 @@ public class UPArticlePostDAOImpl implements UPArticlePostDAO {
 
     @Autowired
     SessionFactory sessionFactory;
+
+    public List<UPArticlePost> getArticlesToShow() {
+        Query query=sessionFactory.getCurrentSession().createQuery("from UPArticlePost where deleted=:deleted");
+        query.setParameter("deleted", false);
+        return query.getResultList();
+    }
+
+
+    public List<UPArticlePost> getArticlesByDate(String date) {
+        Query query=sessionFactory.getCurrentSession().createQuery("from UPArticlePost where creationDate=:date");
+        query.setParameter("date", date);
+
+        return query.getResultList();
+    }
 
     public List<UPArticlePost> getArticlesByTag(UPTag tag) {
         Query query=sessionFactory.getCurrentSession().createQuery("select a from UPArticlePost a join a.tags t where t.id=:tid ");
@@ -37,5 +52,13 @@ public class UPArticlePostDAOImpl implements UPArticlePostDAO {
     public List<UPArticlePost> getArticles(){
 
         return sessionFactory.getCurrentSession().createQuery("from UPArticlePost ").list();
+    }
+
+    public List<UPArticlePost> searchArticle(String str) {
+        return null;
+    }
+
+    public void update(UPArticlePost upArticlePost) {
+        sessionFactory.getCurrentSession().update(upArticlePost);
     }
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+
+    <var name="createdArticle" class="com.vadimrostov.uyutp.web.dto.ArticleDto"/>
+    <var name="flowBean" class="com.vadimrostov.uyutp.web.dto.FlowDto"/>
+
+
+
+    <view-state id="category" model="createdArticle" view="post/categories.jsp">
+
+        <transition on="done" to="content"/>
+
+    </view-state>
+
+
+
+
+
+   <view-state id="content" model="createdArticle" view="post/content.jsp">
+       <on-render>
+           <evaluate expression="flowService.tags" result="createdArticle.tagSet"/>
+       </on-render>
+       <transition on="done" to="descnsame"/>
+       <transition on="back" to="category"/>
+
+
+   </view-state>
+    
+    <view-state id="descnsame" model="createdArticle" view="post/descnsame.jsp">
+
+        <transition on="done" to="options"/>
+        <transition on="back" to="content"/>
+
+    </view-state>
+
+    <action-state id="options">
+        <evaluate expression="flowService.saveArticle(createdArticle)"/>
+
+        <transition to="okokstate"/>
+    </action-state>
+
+    <end-state id="okokstate" view="post/done.jsp">
+    </end-state>
+
+</flow>

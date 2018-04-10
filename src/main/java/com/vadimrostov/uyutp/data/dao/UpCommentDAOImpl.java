@@ -1,6 +1,6 @@
 package com.vadimrostov.uyutp.data.dao;
 
-import com.vadimrostov.uyutp.data.domain.Comment;
+import com.vadimrostov.uyutp.data.domain.UPComment;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,20 +17,24 @@ public class UpCommentDAOImpl implements UPCommentDAO {
     @Autowired
     UPArticlePostDAO upArticlePostDAO;
 
-    public void save(Comment comment) {
-            sessionFactory.getCurrentSession().save(comment);
+    public void save(UPComment UPComment) {
+            sessionFactory.getCurrentSession().save(UPComment);
     }
 
-    public List<Comment> getCommentsForPost(Long id) {
-        Query query=sessionFactory.getCurrentSession().createQuery("from Comment where upArticlePost= :post");
+    public List<UPComment> getCommentsForPost(Long id) {
+        Query query=sessionFactory.getCurrentSession().createQuery("from UPComment where upArticlePost= :post");
 
         query.setParameter("post", upArticlePostDAO.getArticle(id));
         List list=query.getResultList();
         return list;
     }
 
-    public List<Comment> getComments() {
-        return sessionFactory.getCurrentSession().createQuery("from Comment ").list();
+    public UPComment getCommentById(Long id) {
+        return sessionFactory.getCurrentSession().get(UPComment.class, id);
+    }
+
+    public List<UPComment> getComments() {
+        return sessionFactory.getCurrentSession().createQuery("from UPComment ").list();
 
 
     }
