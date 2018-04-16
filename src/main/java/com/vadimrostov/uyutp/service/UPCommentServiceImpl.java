@@ -5,6 +5,7 @@ import com.vadimrostov.uyutp.data.dao.UPCommentDAO;
 import com.vadimrostov.uyutp.data.dao.UPUserDao;
 import com.vadimrostov.uyutp.data.domain.UPComment;
 import com.vadimrostov.uyutp.web.dto.CommentDto;
+import com.vadimrostov.uyutp.web.dto.LikeDto;
 import com.vadimrostov.uyutp.web.dto.UserDto;
 import com.vadimrostov.uyutp.web.tree.CommentDtoTreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,5 +128,9 @@ public class UPCommentServiceImpl implements UPCommentService {
         UPComment.setUpArticlePost(upArticlePostDAO.getArticle(commentDto.getPostId()));
         upCommentDAO.save(UPComment);
         return UPComment.getId();
+    }
+
+    public LikeDto addLikeToComment(Long id, boolean val) {
+        return null;
     }
 }

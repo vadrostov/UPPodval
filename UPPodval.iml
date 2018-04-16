@@ -27,6 +27,7 @@
       <configuration>
         <datasource-map>
           <unit-entry name="getSessionFactory" />
+          <unit-entry name="resources:hibernate.cfg.xml" />
           <unit-entry name="web:WEB-INF:resources:hibernate.cfg.xml" />
         </datasource-map>
         <naming-strategy-map />

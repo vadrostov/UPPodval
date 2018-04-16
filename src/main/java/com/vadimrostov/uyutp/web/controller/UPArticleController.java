@@ -12,6 +12,7 @@ import com.vadimrostov.uyutp.web.controller.web.jsonbeans.Response;
 import com.vadimrostov.uyutp.web.dto.ArticleDto;
 import com.vadimrostov.uyutp.web.dto.CommentDto;
 import com.vadimrostov.uyutp.web.dto.FlowDto;
+import com.vadimrostov.uyutp.web.dto.LikeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -49,6 +50,9 @@ public class UPArticleController {
 
     @Autowired
     UPPostCategoryService categoryService;
+
+    private String INCREMENT_VAL="inc";
+    private String DECREMET_VAL="dec";
 
 
 
@@ -134,7 +138,19 @@ public class UPArticleController {
 
     @RequestMapping(value = "/commentrate", method = RequestMethod.GET)
     public @ResponseBody Response likeComment(@RequestParam String text, @RequestParam String val){
-        String s=text+val;
+        boolean bval;
+        if(val.equals(INCREMENT_VAL)){
+            bval=true;
+        }
+        else if (val.equals(DECREMET_VAL)){
+            bval=false;
+        }
+        else throw new UnsupportedOperationException();
+
+        long commentId=Long.parseLong(text);
+
+        LikeDto dto=upCommentService.addLikeToComment(commentId, bval);
+
         return new Response();
     }
 

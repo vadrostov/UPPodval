@@ -2,6 +2,7 @@ package com.vadimrostov.uyutp.service;
 
 import com.vadimrostov.uyutp.data.domain.UPComment;
 import com.vadimrostov.uyutp.web.dto.CommentDto;
+import com.vadimrostov.uyutp.web.dto.LikeDto;
 import com.vadimrostov.uyutp.web.tree.CommentDtoTreeNode;
 
 import java.util.List;
@@ -24,5 +25,7 @@ public interface UPCommentService {
     public long saveNewComment(CommentDto commentDto);
 
     public CommentDto getDtoById(Long id);
+
+    public LikeDto addLikeToComment(Long id, boolean val);
 
 }
