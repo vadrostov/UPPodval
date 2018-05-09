@@ -189,6 +189,24 @@ public class UPPostServiceImpl implements UPPostService{
 
     }
 
+
+    public ArticleDto getArticleDto(UPArticlePost upArticlePost){
+
+        ArticleDto dto= new ArticleDto();
+        dto.setAuthor(upArticlePost.getAuthor());
+        dto.setDate(upArticlePost.getDate());
+        dto.setDescription(upArticlePost.getDescription());
+        dto.setName(upArticlePost.getName());
+        dto.setContent(upArticlePost.getContent());
+        dto.setRate(upArticlePost.getRate());
+        dto.setTagDtoList(upTagService.getDtoTagList(upArticlePost.getTags()));
+        dto.setCommentDtoList(commentService.getCommentsDto(upArticlePost.getUPComments()));
+        dto.setId(upArticlePost.getId());
+
+        return dto;
+
+    }
+
     public int getRate(Long id) {
         UPArticlePost upArticlePost=upArticlePostDAO.getArticle(id);
         int i=0;

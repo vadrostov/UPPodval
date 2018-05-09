@@ -52,6 +52,8 @@ public class ArticleDto implements Comparable<ArticleDto>, Serializable{
 
     private Set<TagDto> tagSet;
 
+    List<CommentDto> commentDtos;
+
     public ArticleDto() {
 
        categoryDtos=new HashSet<CategoryDto>();
@@ -163,6 +165,14 @@ public class ArticleDto implements Comparable<ArticleDto>, Serializable{
 
     public Set<TagDto> getTagSet() {
         return tagSet;
+    }
+
+    public List<CommentDto> getCommentDtos() {
+        return commentDtos;
+    }
+
+    public void setCommentDtos(List<CommentDto> commentDtos) {
+        this.commentDtos = commentDtos;
     }
 
     public void setTagSet(Set<TagDto> tagSet) {

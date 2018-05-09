@@ -42,4 +42,6 @@ public interface UPPostService {
 
     public List<ArticleCardDto> getGardList(List<ArticleDto> dtoList);
 
+    public ArticleDto getArticleDto(UPArticlePost upArticlePost);
+
 }

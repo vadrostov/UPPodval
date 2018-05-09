@@ -1,0 +1,61 @@
+
+<div ng-repeat="article in articles">
+<div class="container" id="artContainer">
+    <div class="row">
+
+        <div class="row">
+            <div class="col-lg-2" align="center">
+                <button type="button" class="btn btn-sm btn-primary  btn-block" >+</button>
+            </div>
+            <div class="col-lg-10">
+              <p ng-click="openArticle()">{{article.name}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2" align="center">
+                {{article.rate}}
+            </div>
+            <div class="col-lg-10" >
+                {{article.tags}}
+                 </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2" align="center">
+                <button type="button" class="btn btn-sm btn-primary  btn-block" >-</button>
+            </div>
+
+            <div class="col-lg-4">
+                {{article.author}}
+            </div>
+
+            <div class="col-lg-4">
+                {{article.date}}
+            </div>
+
+            <div class="col-lg-2">
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+           {{article.content}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">Комментарии: 667</div>
+        <div class="col-lg-8"></div>
+    </div>
+
+
+
+
+</div></div>

@@ -1,0 +1,28 @@
+
+<div ng-repeat="comment in comments">
+    <div class="comment_content">
+        <div class="row">
+            <div class="col-lg-12" >
+                <div class="row">
+                    <div class="col-lg-4">{{comment.author}}</div>
+                    <div class="col-lg-4"/>
+                    <div class="col-lg-4">
+                        <p data-val="dec" data-id="49">-</p>
+                        <p>  </p>
+                        <p data-val="inc" data-id="49">+</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">{{comment.content}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8"/>
+                    <div class="col-lg-4">
+                        <p style="cursor: pointer;">Ответить</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
