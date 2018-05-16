@@ -1,0 +1,10 @@
+<form>
+<div ng-repeat="role in roles">
+
+
+    <div>
+{{role.name}}{{$index}}
+        <input type="checkbox" ng-model="role.hasRole" value="role.hasrole"></div>
+</div>
+<button ng-click="submituserroles()">Submit</button>
+</form>

@@ -1,5 +1,8 @@
 package com.vadimrostov.uyutp.springconfig;
 
+import com.vadimrostov.uyutp.security.accesshandlers.AjaxAuthEntryPoint;
+import com.vadimrostov.uyutp.security.accesshandlers.AjaxAuthFailureHandler;
+import com.vadimrostov.uyutp.security.accesshandlers.AjaxAuthSuccessHandler;
 import com.vadimrostov.uyutp.security.service.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,6 +34,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     UserDetailsService userDetailsService;
 
+    @Autowired
+    AjaxAuthSuccessHandler ajaxAuthSuccessHandler;
+
+    @Autowired
+    AjaxAuthEntryPoint ajaxAuthEntryPoint;
+
+    @Autowired
+    AjaxAuthFailureHandler ajaxAuthFailureHandler;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -38,10 +50,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/login*").permitAll()
                 .and()
-                .formLogin().loginPage("/login").loginProcessingUrl("/j_spring_security_check").usernameParameter("j_username").passwordParameter("j_password").
-                and()
-                .httpBasic().and().
+                .
                 csrf().disable();
+        http.formLogin().loginProcessingUrl("/j_spring_security_check");
+        http.formLogin().usernameParameter("j_username");
+        http.formLogin().passwordParameter("j_password");
+        http.exceptionHandling().authenticationEntryPoint(ajaxAuthEntryPoint);
+        http.formLogin().successHandler(ajaxAuthSuccessHandler);
+        http.formLogin().failureHandler(ajaxAuthFailureHandler);
 
     }
 

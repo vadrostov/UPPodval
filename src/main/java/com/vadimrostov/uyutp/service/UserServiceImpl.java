@@ -6,12 +6,14 @@ import com.vadimrostov.uyutp.data.domain.user.Role;
 import com.vadimrostov.uyutp.data.domain.user.User;
 import com.vadimrostov.uyutp.security.validation.EmailExistsException;
 import com.vadimrostov.uyutp.security.validation.LoginExistException;
+import com.vadimrostov.uyutp.web.dto.RoleDto;
 import com.vadimrostov.uyutp.web.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -78,6 +80,21 @@ public class UserServiceImpl implements UserService {
         userDto.setLogin(user.getLogin());
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());
+        Set<RoleDto> roles=new HashSet<RoleDto>();
+        List<Role> allroles=upRoleDao.getRoleList();
+        for (Role role: allroles){
+            RoleDto roleDto=new RoleDto();
+            roleDto.setId(role.getId());
+            roleDto.setName(role.getReadableName());
+            for (Role userrole: user.getRoles()){
+                if(userrole.equals(role)){
+                    roleDto.setHasRole(true);
+                }
+            }
+            roles.add(roleDto);
+        }
+
+        userDto.setRoles(roles);
         return userDto;
     }
 }

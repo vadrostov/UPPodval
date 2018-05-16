@@ -1,10 +1,13 @@
 package com.vadimrostov.uyutp.web.dto;
 
+import com.vadimrostov.uyutp.data.domain.user.Role;
 import com.vadimrostov.uyutp.security.validation.ValidEmail;
 import com.vadimrostov.uyutp.security.validation.ValidPassword;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
+import java.util.Set;
 
 public class UserDto {
 
@@ -26,6 +29,8 @@ public class UserDto {
 
     private boolean makeadmin;
 
+    private Set<RoleDto> roles;
+
     public String getLogin() {
         return login;
     }
@@ -35,6 +40,13 @@ public class UserDto {
     }
 
 
+    public Set<RoleDto> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleDto> roles) {
+        this.roles = roles;
+    }
 
     public String getPassword() {
         return password;

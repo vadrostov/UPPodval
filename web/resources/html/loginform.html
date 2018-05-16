@@ -1,0 +1,13 @@
+<button type="button" onclick="location.href='/user/registration';" class="btn btn-secondary btn-block btn-sm">Регистрация</button>
+<form id="loginform" method='POST'>
+
+    <div>
+
+        <input type="text" id="j_username" name="j_username" class="form-control" placeholder="Логин" aria-describedby="addon1">
+    </div>
+
+    <div >
+        <input type="password" id="j_password" name="j_password" class="form-control" placeholder="Пароль" aria-describedby="addon1">
+    </div>
+    <button ng-click="auth()" class="btn btn-primary btn-block btn-sm">Войти</button>
+</form>

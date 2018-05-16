@@ -14,6 +14,8 @@ public class Role {
 
     Set<User> users;
 
+    String readableName;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ROLE_ID")
@@ -41,5 +43,21 @@ public class Role {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    @Column(name = "ROLE_READABLE")
+    public String getReadableName() {
+        return readableName;
+    }
+
+    public void setReadableName(String readableName) {
+        this.readableName = readableName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Role role=(Role)obj;
+
+        return this.id.equals(role.id);
     }
 }
